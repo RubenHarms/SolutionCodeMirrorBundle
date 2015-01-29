@@ -44,8 +44,17 @@ class CodeMirrorExtension extends \Twig_Extension
     }
 
     public function code_mirror_get_js_mode($parameters)
-    {
-        return $this->assetManager->getMode($parameters['mode']);
+    {                
+        $dir = dirname(dirname(__FILE__)).'/Resources/public';
+       $mode =  $this->assetManager->getMode($parameters['mode']);
+       $mode = str_replace($dir, "bundles/solutioncodemirror", $mode);
+       if(!is_array($mode)){
+           $mode = array($mode);
+       }
+      
+      
+       
+       return $mode;
     }
 
     public function code_mirror_get_css_theme($parameters)

@@ -22,11 +22,14 @@ Add default parameters to `config.yml`:
 twig:
     form:
         resources:
-            - 'SolutionCodeMirrorBundle:Form:redactor_widget.html.twig'
+            - 'SolutionCodeMirrorBundle:Form:code_mirror_widget.html.twig
+            
+assetic:
+    bundles: [SolutionCodeMirrorBundle]
 
 solution_code_mirror:
     parameters:
-      mode: text/html
+      mode: html
       lineNumbers: true
       lineWrapping: true
     mode_dirs:
@@ -50,4 +53,3 @@ $ ./app/console assets:install web --symlink
      )
  ));
 ```
-

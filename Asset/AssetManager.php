@@ -55,7 +55,8 @@ class AssetManager
     }
 
     public function getMode($key)
-    {
+    {        
+        
         return isset( $this->modes[$key]) ? $this->modes[$key] : false;
     }
 

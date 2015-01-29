@@ -2,20 +2,33 @@
 
 {% block code_mirror_widget %}
     {% spaceless %}
-        {{ block('form_widget') }}
+{{ block('textarea_widget') }}
         {% if code_mirror_is_first_call() %}
             {% javascripts '@SolutionCodeMirrorBundle/Resources/public/js/codemirror.js'  %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
-        {% endif %}
-        {% for mode_path in code_mirror_get_js_mode(parameters) %}
+            
+            {%  stylesheets 'bundles/solutioncodemirror/css/codemirror.css' %}
+                <link rel="stylesheet" type="text/css" href="{{ asset_url }}">
+            {% endstylesheets %}
+            
+        {% endif %} 
+        
+        
+         <script type="text/javascript" src="{{ asset('/bundles/solutioncodemirror/js/mode/' ~parameters.mode ~'.js') }}"></script>
+        
+        {#
+        {% for mode_path in code_mirror_get_js_mode(parameters) %}        
+            
+        
             <script src="{{ asset(mode_path) }}" type="text/javascript"></script>
-        {% endfor %}
-
+        {% endfor %} #}
+{#
         {% if code_mirror_get_css_theme(parameters) %}
-            {% set theme = code_mirror_get_css_theme(parameters) %}
-
-        {% endif %}
+            {% set theme = code_mirror_get_css_theme(parameters) %}            
+              {# <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/solutioncodemirror/css/theme/' ~parameters.theme ~'.css') }}"> #}
+              {#
+        {% endif %} #}
 
         <script>
             var code_mirror_{{ id }} = CodeMirror.fromTextArea(document.getElementById("{{ id }}"), {{ code_mirror_parameters_render(parameters)|raw }});
